@@ -1,4 +1,5 @@
 require('dotenv').config()
+
 const TelegramBot = require('node-telegram-bot-api')
 const axios = require('axios');
 
@@ -17,7 +18,7 @@ bot.on('message', async msg => {
     const chatId = msg.chat.id
 
     if (msg.text === '/cat') {
-        axios.get(catURI)
+        await axios.get(catURI)
             .then(resp => {
                 const photoURI = resp.data.file
                 bot.sendPhoto(chatId, photoURI)
@@ -25,7 +26,7 @@ bot.on('message', async msg => {
     }
 
     if (msg.text === '/dog') {
-        axios.get(dogURI)
+        await axios.get(dogURI)
             .then(resp => {
                 const photoURI = resp.data.message
                 bot.sendPhoto(chatId, photoURI)
